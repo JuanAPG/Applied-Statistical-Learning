@@ -5,8 +5,8 @@ Este estudio analiza la relación subyacente entre el índice de felicidad de di
 
 ## Base de Datos
 Los datos se encuentran en el directorio `/data/`.
-* **Fuente original:** Indicadores del *World Happiness Report* y portal oficial de datos abiertos del *World Bank*[cite: 2, 5].
-* **Características del conjunto de datos:** La muestra abarca 141 países a nivel global[cite: 2]. El dataset fue enriquecido mediante la integración de 3 variables complementarias: población total, esperanza de vida al nacer y un puntaje de control de corrupción, resultando en un entorno de 8 variables finales tras aplicar transformaciones logarítmicas[cite: 2, 5].
+* **Fuente de los datos:** La información base para la métrica de bienestar fue obtenida del **World Happiness Report (WHR)**, complementada y emparejada con indicadores de desarrollo del portal de datos abiertos del Banco Mundial.
+* **Características del conjunto de datos:** La muestra abarca 141 países a nivel global. El dataset fue enriquecido mediante la integración de 3 variables complementarias: población total, esperanza de vida al nacer y un puntaje de control de corrupción, resultando en un entorno de 8 variables finales tras aplicar transformaciones logarítmicas.
 
 ## Índice de Archivos del Proyecto
 * [`regression_models.ipynb`](./regression_models.ipynb): Experimentación de modelos de regresión (simple y múltiple), evaluación de colinealidad e interpretación de coeficientes estandarizados.
