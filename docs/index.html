@@ -1,1 +1,271 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Angel Galván Navarro | Portafolio de Investigación</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables de Color */
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        /* Reset y Estilos Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0; /* Empieza oculto para la animación */
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header / Hero Section */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .contact-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid de Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Tarjetas de Proyecto */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+        }
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+            margin-bottom: 25px;
+        }
+
+        /* Botones de acción dentro de la tarjeta */
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: 1px solid var(--accent-color);
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="animate">
+            <h1>Juan Angel Galván Navarro</h1>
+            <h2>Applied Statistical Learning & Predictive Modeling</h2>
+            <p>Portafolio de investigación en Ciencia de Datos. Colección de modelos predictivos y análisis estadísticos aplicados a salud pública, macroeconomía y educación.</p>
+            <a href="mailto:juan.galvann@udem.edu" class="contact-btn">
+                <i class="fa-regular fa-envelope"></i> juan.galvann@udem.edu
+            </a>
+        </header>
+
+        <!-- Grid de Proyectos -->
+        <main class="projects-grid">
+            
+            <!-- Proyecto 1 -->
+            <section class="card animate delay-1">
+                <i class="fa-solid fa-heart-pulse card-icon"></i>
+                <h3>Riesgos de Obesidad</h3>
+                <p>Análisis exploratorio e inferencial de factores de riesgo asociados a niveles de obesidad utilizando características demográficas y hábitos de consumo.</p>
+                <div class="card-actions">
+                    <a href="01_obesity_inference.html" class="btn btn-primary">Ver Reporte Interactivo</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/01-Obesity-Health-Risk-Analysis" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/exploratory_analysis.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/data/dataset_obesidad.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
+                </div>
+            </section>
+
+            <!-- Proyecto 2 -->
+            <section class="card animate delay-2">
+                <i class="fa-solid fa-chart-line card-icon"></i>
+                <h3>Predictores Macroeconómicos</h3>
+                <p>Modelado de regresión múltiple para determinar el impacto del PIB per cápita, esperanza de vida y corrupción en el índice de felicidad global.</p>
+                <div class="card-actions">
+                    <a href="02_macroeconomic_happiness.html" class="btn btn-primary">Ver Reporte Interactivo</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/02-Macroeconomic-Happiness-Predictors" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/regression_models.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/data/world_bank_extended.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
+                </div>
+            </section>
+
+            <!-- Proyecto 3 -->
+            <section class="card animate delay-3">
+                <i class="fa-solid fa-graduation-cap card-icon"></i>
+                <h3>Rendimiento Estudiantil</h3>
+                <p>Optimización mediante selección de características (Forward Selection) y validación cruzada (K-Fold) para predecir el éxito académico.</p>
+                <div class="card-actions">
+                    <a href="03_student_performance.html" class="btn btn-primary">Ver Reporte Interactivo</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/03-Student-Performance-Optimization" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/feature_selection_cv.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/data/uci_student_data.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
+                </div>
+            </section>
+
+            <!-- Proyecto 4 -->
+            <section class="card animate delay-3">
+                <i class="fa-solid fa-baby-carriage card-icon"></i>
+                <h3>Determinantes Edad Materna</h3>
+                <p>Análisis de microdatos a gran escala (Big Data) e inferencia mediante regresión polinomial sobre registros nacionales de nacimientos del INEGI.</p>
+                <div class="card-actions">
+                    <a href="04_maternal_age_determinants.html" class="btn btn-primary">Ver Reporte Interactivo</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/04-Maternal-Age-Determinants" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
+                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/04-Maternal-Age-Determinants/maternal_age_modeling.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
+                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="animate delay-3">
+            <p>&copy; 2026 Juan Angel Galván Navarro. Universidad de Monterrey.</p>
+            <p>Construido para el curso de Inteligencia Artificial.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
