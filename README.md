@@ -16,5 +16,9 @@ Bienvenido a este repositorio de investigación, el cual contiene una colección
    Construcción de un modelo predictivo con selección de características (*Forward Selection*) y validación cruzada para predecir el éxito académico.
    * **Reporte interactivo:** [Ver reporte en GitHub Pages](URL_A_TU_GITHUB_PAGES/03_student_performance.html)
 
+4. **[Determinantes Sociodemográficos de la Edad Materna al Nacimiento](./04-Maternal-Age-Determinants)**
+   Análisis de microdatos a gran escala e inferencia estadística mediante regresión polinomial para caracterizar los factores de riesgo asociados a la maternidad temprana en México.
+   * **Reporte interactivo:** [Ver reporte en GitHub Pages](URL_A_TU_GITHUB_PAGES/04_maternal_age_determinants.html)
+
 ---
 *Desarrollado por Juan Angel Galván Navarro.*
