@@ -32,7 +32,7 @@ Bienvenido a este repositorio de investigación, el cual contiene una colección
    Benchmark de Random Forest, Gradient Boosting, SVM con kernel radial y una red neuronal implementada en NumPy, evaluando desempeño predictivo frente a costo computacional y escalabilidad.
    * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/07_ensemble_benchmark.html)
 
-8. **[Clasificación del Registro Tardío de Nacimientos en México](./08-Birth-Registration-Delay)** · *Proyecto final*
+8. **[Clasificación del Registro Tardío de Nacimientos en México](./08-Birth-Registration-Delay)** · *Proyecto*
    Estudio del derecho a la identidad mediante seis modelos de clasificación, con detección y demostración de fuga de datos, tratamiento de valores faltantes como señal, y contraste de los resultados contra cifras oficiales del CONAPO y el INEGI.
    * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/08_registration_delay.html)
 
