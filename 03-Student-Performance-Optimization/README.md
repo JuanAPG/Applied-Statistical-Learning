@@ -1,7 +1,7 @@
 # Predictive Modeling and Feature Selection for Student Performance
 
 ## Descripción General
-El objetivo de este proyecto es construir un modelo de regresión lineal múltiple con alta capacidad de generalización para predecir métricas de desempeño[cite: 3, 4]. La investigación implementa una metodología de aprendizaje automático que incluye transformación de variables categóricas, *Standard Scaling*, y un algoritmo de *Forward Feature Selection* evaluado dinámicamente mediante validación cruzada (K-Fold) para prevenir el sobreajuste[cite: 3].
+El objetivo de este proyecto es construir un modelo de regresión lineal múltiple con alta capacidad de generalización para predecir métricas de desempeño. La investigación implementa una metodología de aprendizaje automático que incluye transformación de variables categóricas, *Standard Scaling*, y un algoritmo de *Forward Feature Selection* evaluado dinámicamente mediante validación cruzada (K-Fold) para prevenir el sobreajuste.
 
 ## Base de Datos
 Los registros procesados se alojan en `/data/uci_student_data.csv`.
@@ -11,4 +11,4 @@ Los registros procesados se alojan en `/data/uci_student_data.csv`.
 ## Índice de Archivos del Proyecto
 * [`feature_selection_cv.ipynb`](./feature_selection_cv.ipynb): Pipeline de Machine Learning completo, desde preprocesamiento y escalado hasta la evaluación de validación cruzada y residuales.
 * [`uci_student_data.csv`](./data/uci_student_data.csv): Conjunto de datos analizado.
-* **Reporte HTML:** [Modelado y Selección de Características](URL_A_TU_GITHUB_PAGES/03_student_performance.html)
+* **Reporte HTML:** [Modelado y Selección de Características](https://juanapg.github.io/Applied-Statistical-Learning/03_student_performance.html)

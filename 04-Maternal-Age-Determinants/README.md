@@ -12,5 +12,5 @@ Este proyecto aborda el fenómeno de la maternidad temprana, una prioridad de sa
 
 ## Índice de Archivos del Proyecto
 * [`maternal_age_modeling.ipynb`](./maternal_age_modeling.ipynb): Pipeline de análisis incluyendo extracción de datos `.dbf`, limpieza de Big Data, matriz de correlación, *Backward Selection* y modelado polinomial con análisis de varianza (ANOVA) y residuales.
-* [`nacim24.dbf`](./data/nacim24.dbf): Archivo de microdatos crudos del INEGI.
-* **Reporte HTML:** [Inferencia Estadística y Geográfica](URL_A_TU_GITHUB_PAGES/04_maternal_age_determinants.html)
+* **Microdatos del INEGI:** [Estadística de Nacimientos (descarga oficial)](https://www.inegi.org.mx/programas/natalidad/#microdatos), no alojados en este repositorio por su volumen.
+* **Reporte HTML:** [Inferencia Estadística y Geográfica](https://juanapg.github.io/Applied-Statistical-Learning/04_maternal_age_determinants.html)

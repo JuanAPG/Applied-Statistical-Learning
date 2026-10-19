@@ -1,7 +1,7 @@
 # Macroeconomic and Social Predictors of Global Happiness
 
 ## Descripción General
-Este estudio analiza la relación subyacente entre el índice de felicidad de diversas naciones y una serie de variables económicas, de salud e institucionales[cite: 2, 5]. Se evaluaron modelos de regresión lineal simple y múltiple para demostrar que el PIB transformado logarítmicamente, en conjunto con factores sociales, aproxima con alta precisión el ingreso per cápita como el predictor dominante del bienestar global[cite: 2, 5].
+Este estudio analiza la relación subyacente entre el índice de felicidad de diversas naciones y una serie de variables económicas, de salud e institucionales. Se evaluaron modelos de regresión lineal simple y múltiple para demostrar que el PIB transformado logarítmicamente, en conjunto con factores sociales, aproxima con alta precisión el ingreso per cápita como el predictor dominante del bienestar global.
 
 ## Base de Datos
 Los datos se encuentran en el directorio `/data/`.
@@ -10,6 +10,6 @@ Los datos se encuentran en el directorio `/data/`.
 
 ## Índice de Archivos del Proyecto
 * [`regression_models.ipynb`](./regression_models.ipynb): Experimentación de modelos de regresión (simple y múltiple), evaluación de colinealidad e interpretación de coeficientes estandarizados.
-* [`whr_2022_gdp.csv`](./data/whr_2022_gdp.csv): Base de datos base inicial.
+* [`world_bank_extended.csv`](./data/world_bank_extended.csv): Base de datos base inicial.
 * [`world_bank_extended.csv`](./data/world_bank_extended.csv): Base de datos extendida con variables macroeconómicas.
-* **Reporte HTML:** [Resultados de Regresión](URL_A_TU_GITHUB_PAGES/02_macroeconomic_happiness.html)
+* **Reporte HTML:** [Resultados de Regresión](https://juanapg.github.io/Applied-Statistical-Learning/02_macroeconomic_happiness.html)
