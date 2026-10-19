@@ -1,319 +1,391 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Angel Galván Navarro | Portafolio de Investigación</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Variables de Color */
-        :root {
-            --bg-color: #f8fafc;
-            --text-color: #1e293b;
-            --text-muted: #64748b;
-            --accent-color: #2563eb;
-            --accent-hover: #1d4ed8;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juan Angel Galván Navarro · Portafolio de Investigación</title>
+<meta name="description" content="Portafolio de investigación en aprendizaje estadístico aplicado: ocho estudios de regresión y clasificación sobre datos reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg:#f7f8fa; --surface:#ffffff; --ink:#0d1117; --ink-2:#424d5c; --muted:#68727f;
+  --line:#e2e6ec; --line-2:#eef1f5; --accent:#2563eb; --accent-ink:#1d4ed8; --accent-wash:#eff4fe;
+  --shadow:0 1px 2px rgba(13,17,23,.05), 0 8px 24px -12px rgba(13,17,23,.14);
+  --shadow-lg:0 2px 4px rgba(13,17,23,.06), 0 20px 44px -18px rgba(13,17,23,.26);
+  --r:14px; --maxw:1140px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#0b0e13; --surface:#131821; --ink:#e9edf3; --ink-2:#b2bccb; --muted:#8290a3;
+    --line:#242c38; --line-2:#1b222c; --accent:#4b8cf5; --accent-ink:#79a9f8; --accent-wash:#152138;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -12px rgba(0,0,0,.7);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.55), 0 20px 44px -18px rgba(0,0,0,.85);
+  }
+}
+*,*::before,*::after { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
+body {
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif; font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a { color:inherit; text-decoration:none; }
+.wrap { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
 
-        /* Reset y Estilos Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-        }
+/* ── barra superior ───────────────────────────── */
+.nav {
+  position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid transparent;
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+.nav.is-stuck { border-bottom-color:var(--line); box-shadow:0 1px 12px -6px rgba(0,0,0,.25); }
+.nav__in { max-width:var(--maxw); margin:0 auto; padding:13px 24px; display:flex; align-items:center; gap:18px; }
+.nav__brand { font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600; letter-spacing:-.01em; }
+.nav__brand span { color:var(--muted); font-weight:400; }
+.nav__links { margin-left:auto; display:flex; gap:4px; }
+.nav__links a {
+  font-size:13.5px; color:var(--ink-2); padding:6px 12px; border-radius:8px;
+  transition:background .2s ease, color .2s ease;
+}
+.nav__links a:hover { background:var(--line-2); color:var(--ink); }
+.nav__links a.is-active { color:var(--accent-ink); background:var(--accent-wash); }
+@media (max-width:620px) { .nav__links a:not(.nav__cta) { display:none; } }
 
-        /* Animaciones */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0; /* Empieza oculto para la animación */
-        }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
+/* ── hero ─────────────────────────────────────── */
+.hero { position:relative; padding:84px 0 52px; overflow:hidden; }
+.hero__grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size:30px 30px;
+  mask-image:radial-gradient(ellipse 70% 58% at 50% 32%, #000 38%, transparent 76%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 58% at 50% 32%, #000 38%, transparent 76%);
+}
+.hero__in { position:relative; }
+.eyebrow {
+  display:inline-flex; align-items:center; gap:9px; font-family:"JetBrains Mono",monospace;
+  font-size:11.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--accent-ink); background:var(--accent-wash); border:1px solid color-mix(in srgb,var(--accent) 22%, transparent);
+  padding:6px 13px; border-radius:999px;
+}
+.dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.72)} }
+h1 {
+  font-size:clamp(34px,5.6vw,58px); line-height:1.06; letter-spacing:-.033em; font-weight:700;
+  margin:22px 0 0; max-width:17ch; text-wrap:balance;
+}
+h1 em { font-style:normal; color:var(--accent); }
+.hero__lead { margin:20px 0 0; font-size:17.5px; color:var(--ink-2); max-width:62ch; }
+.stats { display:flex; flex-wrap:wrap; gap:38px; margin-top:38px; padding-top:30px; border-top:1px solid var(--line); }
+.stat b { display:block; font-family:"JetBrains Mono",monospace; font-size:27px; font-weight:600; letter-spacing:-.02em; }
+.stat span { font-size:13px; color:var(--muted); }
 
-        /* Contenedor Principal */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+/* ── secciones ────────────────────────────────── */
+.sec { padding:48px 0 8px; }
+.sec__head { display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+.sec__num { font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:600; color:var(--accent); letter-spacing:.06em; }
+.sec__head h2 { font-size:clamp(23px,3vw,31px); letter-spacing:-.025em; margin:0; font-weight:700; }
+.sec__count {
+  margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--muted);
+  border:1px solid var(--line); border-radius:999px; padding:3px 11px;
+}
+.sec__lead { color:var(--ink-2); max-width:72ch; margin:0 0 30px; font-size:15.5px; }
+.rule { height:1px; background:linear-gradient(90deg, var(--accent) 0%, var(--line) 22%, var(--line) 100%); margin-bottom:26px; }
 
-        /* Header / Hero Section */
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            padding: 40px 0;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
-        header h2 {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-        header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-        }
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            padding: 10px 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .contact-btn:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
+/* ── tarjetas ─────────────────────────────────── */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+@media (min-width:880px) { .grid { grid-template-columns:repeat(2,1fr); } }
+.card {
+  position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:24px 24px 20px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow);
+  transition:transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, border-color .28s ease;
+}
+.card::before {
+  content:""; position:absolute; left:0; top:18px; bottom:18px; width:2px; border-radius:2px;
+  background:var(--accent); opacity:0; transform:scaleY(.3); transform-origin:center;
+  transition:opacity .28s ease, transform .28s cubic-bezier(.22,1,.36,1);
+}
+.card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:color-mix(in srgb,var(--accent) 34%, var(--line)); }
+.card:hover::before { opacity:1; transform:scaleY(1); }
+.card--feature { border-color:color-mix(in srgb,var(--accent) 30%, var(--line)); background:linear-gradient(180deg,var(--accent-wash) 0%, var(--surface) 46%); }
+.card__head { display:flex; align-items:center; gap:10px; }
+.card__num { font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.06em; }
+.badge {
+  margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:10.5px; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase; color:#fff; background:var(--accent);
+  padding:3px 9px; border-radius:999px;
+}
+.card__title { font-size:18.5px; font-weight:600; letter-spacing:-.018em; margin:0; line-height:1.28; }
+.card__desc { margin:0; font-size:14.6px; color:var(--ink-2); flex:1; }
+.chips { list-style:none; display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 4px; padding:0; }
+.chips li {
+  font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--muted);
+  border:1px solid var(--line); border-radius:6px; padding:3px 8px; white-space:nowrap;
+}
+.card__links { display:flex; flex-wrap:wrap; gap:7px; padding-top:13px; border-top:1px solid var(--line-2); }
+.btn {
+  display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; cursor:pointer;
+  padding:8px 12px; min-height:36px; border:1px solid var(--line); border-radius:9px; color:var(--ink-2);
+  background:transparent; transition:background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.btn:hover { background:var(--line-2); color:var(--ink); border-color:var(--muted); }
+.btn:active { transform:translateY(1px); }
+@media (pointer:coarse) {
+  .btn { min-height:44px; padding:11px 14px; }
+  .nav__links a { min-height:44px; display:inline-flex; align-items:center; }
+}
+.btn--primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+.btn--primary:hover { background:var(--accent-ink); border-color:var(--accent-ink); color:#fff; }
+.i { width:15px; height:15px; flex:none; }
+:where(a,button):focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:9px; }
 
-        /* Grid de Proyectos */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+/* ── footer ───────────────────────────────────── */
+.foot { margin-top:74px; border-top:1px solid var(--line); padding:34px 0 54px; }
+.foot__in { display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; }
+.foot p { margin:0; font-size:13.5px; color:var(--muted); }
+.foot a.mail { display:inline-flex; align-items:center; gap:7px; font-size:13.5px; color:var(--ink-2); }
+.foot a.mail:hover { color:var(--accent-ink); }
 
-        /* Tarjetas de Proyecto */
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent-color);
-        }
-        .card-icon {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-        .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 15px;
-        }
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            flex-grow: 1;
-            margin-bottom: 25px;
-        }
-
-        /* Botones de acción dentro de la tarjeta */
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .btn {
-            display: inline-block;
-            text-align: center;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: #fff;
-            border: 1px solid var(--accent-color);
-        }
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-        }
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-secondary:hover {
-            background-color: #f1f5f9;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-        }
-    </style>
+/* ── revelado al hacer scroll ─────────────────── */
+.reveal { opacity:0; transform:translateY(16px); }
+.reveal.in { opacity:1; transform:none; transition:opacity .5s ease, transform .55s cubic-bezier(.22,1,.36,1); transition-delay:var(--d,0ms); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .reveal, .reveal.in { opacity:1; transform:none; transition:none; }
+  .dot { animation:none; }
+  .card, .btn { transition:none; }
+  .card:hover { transform:none; }
+}
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header -->
-        <header class="animate">
-            <h1>Juan Angel Galván Navarro</h1>
-            <h2>Applied Statistical Learning & Predictive Modeling</h2>
-            <p>Portafolio de investigación en Ciencia de Datos. Colección de modelos predictivos y análisis estadísticos aplicados a salud pública, macroeconomía, educación y derechos sociales, desde la inferencia y la regresión hasta métodos de clasificación, ensambles y redes neuronales.</p>
-            <a href="mailto:juan.galvann@udem.edu" class="contact-btn">
-                <i class="fa-regular fa-envelope"></i> juan.galvann@udem.edu
-            </a>
-        </header>
-
-        <!-- Grid de Proyectos -->
-        <main class="projects-grid">
-            
-            <!-- Proyecto 1 -->
-            <section class="card animate delay-1">
-                <i class="fa-solid fa-heart-pulse card-icon"></i>
-                <h3>Riesgos de Obesidad</h3>
-                <p>Análisis exploratorio e inferencial de factores de riesgo asociados a niveles de obesidad utilizando características demográficas y hábitos de consumo.</p>
-                <div class="card-actions">
-                    <a href="01_obesity_inference.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/01-Obesity-Health-Risk-Analysis" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/exploratory_analysis.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/data/dataset_obesidad.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
-                </div>
-            </section>
-
-            <!-- Proyecto 2 -->
-            <section class="card animate delay-2">
-                <i class="fa-solid fa-chart-line card-icon"></i>
-                <h3>Predictores Macroeconómicos</h3>
-                <p>Modelado de regresión múltiple para determinar el impacto del PIB per cápita, esperanza de vida y corrupción en el índice de felicidad global.</p>
-                <div class="card-actions">
-                    <a href="02_macroeconomic_happiness.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/02-Macroeconomic-Happiness-Predictors" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/regression_models.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/data/world_bank_extended.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
-                </div>
-            </section>
-
-            <!-- Proyecto 3 -->
-            <section class="card animate delay-3">
-                <i class="fa-solid fa-graduation-cap card-icon"></i>
-                <h3>Rendimiento Estudiantil</h3>
-                <p>Optimización mediante selección de características (Forward Selection) y validación cruzada (K-Fold) para predecir el éxito académico.</p>
-                <div class="card-actions">
-                    <a href="03_student_performance.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/03-Student-Performance-Optimization" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/feature_selection_cv.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/data/uci_student_data.csv" class="btn btn-secondary"><i class="fa-solid fa-table"></i> Descargar Dataset</a>
-                </div>
-            </section>
-
-            <!-- Proyecto 4 -->
-            <section class="card animate delay-3">
-                <i class="fa-solid fa-baby-carriage card-icon"></i>
-                <h3>Determinantes Edad Materna</h3>
-                <p>Análisis de microdatos a gran escala (Big Data) e inferencia mediante regresión polinomial sobre registros nacionales de nacimientos del INEGI.</p>
-                <div class="card-actions">
-                    <a href="04_maternal_age_determinants.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/04-Maternal-Age-Determinants" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/04-Maternal-Age-Determinants/maternal_age_modeling.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
-                </div>
-            </section>
-
-            <!-- Embarazo Adolescente -->
-            <section class="card animate delay-1">
-                <i class="fa-solid fa-chart-pie card-icon"></i>
-                <h3>Embarazo Adolescente</h3>
-                <p>Regresión logística implementada desde cero con Newton-Raphson, validación cruzada estratificada, curva ROC y análisis de razones de momios.</p>
-                <div class="card-actions">
-                    <a href="05_adolescent_pregnancy.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/05-Adolescent-Pregnancy-Risk-Factors" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/05-Adolescent-Pregnancy-Risk-Factors/logistic_regression_classification.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
-                </div>
-            </section>
-            <!-- Discriminantes y Árboles -->
-            <section class="card animate delay-2">
-                <i class="fa-solid fa-sitemap card-icon"></i>
-                <h3>Discriminantes y Árboles</h3>
-                <p>Análisis Discriminante Lineal programado desde cero frente a un árbol con poda por costo-complejidad, sobre clases fuertemente desbalanceadas.</p>
-                <div class="card-actions">
-                    <a href="06_maternal_age_groups.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/06-Maternal-Age-Group-Classification" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/06-Maternal-Age-Group-Classification/discriminant_analysis_trees.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
-                </div>
-            </section>
-            <!-- Ensambles, SVM y Redes -->
-            <section class="card animate delay-3">
-                <i class="fa-solid fa-network-wired card-icon"></i>
-                <h3>Ensambles, SVM y Redes</h3>
-                <p>Benchmark de Random Forest, Gradient Boosting, SVM radial y una red neuronal en NumPy, contrastando desempeño contra costo computacional.</p>
-                <div class="card-actions">
-                    <a href="07_ensemble_benchmark.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/07-Ensemble-Methods-Benchmark" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/07-Ensemble-Methods-Benchmark/ensemble_svm_neural_networks.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
-                </div>
-            </section>
-            <!-- Registro Tardío de Nacimientos -->
-            <section class="card animate delay-3">
-                <i class="fa-solid fa-id-card card-icon"></i>
-                <h3>Registro Tardío de Nacimientos</h3>
-                <p>Proyecto final. Seis modelos de clasificación sobre el derecho a la identidad, con detección de fuga de datos y contraste contra cifras del CONAPO.</p>
-                <div class="card-actions">
-                    <a href="08_registration_delay.html" class="btn btn-primary">Ver Reporte Interactivo</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/08-Birth-Registration-Delay" class="btn btn-secondary"><i class="fa-brands fa-github"></i> README del Proyecto</a>
-                    <a href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/08-Birth-Registration-Delay/registration_delay_modeling.ipynb" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar Notebook</a>
-                    <a href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-link"></i> Ir a Fuente Oficial (INEGI)</a>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="animate delay-3">
-            <p>&copy; 2026 Juan Angel Galván Navarro. Universidad de Monterrey.</p>
-            <p>Construido para el curso de Inteligencia Artificial.</p>
-        </footer>
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <span class="nav__brand">JAGN<span> / portafolio</span></span>
+    <div class="nav__links">
+      <a href="#regresion">Regresión</a>
+      <a href="#clasificacion">Clasificación</a>
+      <a class="nav__cta" href="https://github.com/JuanAPG/Applied-Statistical-Learning">GitHub</a>
     </div>
+  </div>
+</nav>
 
+<header class="hero">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <span class="eyebrow reveal"><i class="dot" aria-hidden="true"></i>Aprendizaje estadístico aplicado</span>
+    <h1 class="reveal" style="--d:70ms">Ocho estudios sobre datos reales, de la <em>regresión</em> a la <em>clasificación</em>.</h1>
+    <p class="hero__lead reveal" style="--d:140ms">
+      Portafolio de investigación de <strong>Juan Angel Galván Navarro</strong>. Cada estudio parte de una
+      base de datos pública y recorre el proceso completo: limpieza, modelado, validación e interpretación
+      de los resultados en su contexto real.
+    </p>
+    <div class="stats reveal" style="--d:210ms">
+      <div class="stat"><b>8</b><span>investigaciones</span></div>
+      <div class="stat"><b>2</b><span>enfoques metodológicos</span></div>
+      <div class="stat"><b>1.6M</b><span>registros analizados</span></div>
+      <div class="stat"><b>6</b><span>modelos en el proyecto final</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="regresion">
+    <div class="wrap">
+      <div class="sec__head reveal">
+        <span class="sec__num">01</span><h2>Regresión</h2>
+        <span class="sec__count">4 investigaciones</span>
+      </div>
+      <div class="rule reveal"></div>
+      <p class="sec__lead reveal">
+        Predicción de variables cuantitativas e inferencia sobre los factores que las explican. Incluye
+        selección de características, validación cruzada y especificaciones no lineales.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">01</span>
+          </header>
+          <h3 class="card__title">Riesgos de Obesidad</h3>
+          <p class="card__desc">Análisis exploratorio e inferencial de los factores asociados a distintos niveles de obesidad, a partir de características demográficas y hábitos de consumo.</p>
+          <ul class="chips"><li>Inferencia</li><li>EDA</li><li>Correlación</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="01_obesity_inference.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/01-Obesity-Health-Risk-Analysis"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/exploratory_analysis.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/01-Obesity-Health-Risk-Analysis/data/dataset_obesidad.csv"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg><span>Dataset</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">02</span>
+          </header>
+          <h3 class="card__title">Predictores de la Felicidad</h3>
+          <p class="card__desc">Regresión lineal múltiple para medir el impacto del PIB per cápita, la esperanza de vida y la percepción de corrupción sobre el índice de felicidad global.</p>
+          <ul class="chips"><li>Regresión múltiple</li><li>ANOVA</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="02_macroeconomic_happiness.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/02-Macroeconomic-Happiness-Predictors"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/regression_models.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/02-Macroeconomic-Happiness-Predictors/data/world_bank_extended.csv"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg><span>Dataset</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">03</span>
+          </header>
+          <h3 class="card__title">Rendimiento Estudiantil</h3>
+          <p class="card__desc">Modelo predictivo con selección de características por Forward Selection y validación cruzada K-Fold para anticipar el desempeño académico.</p>
+          <ul class="chips"><li>Forward Selection</li><li>K-Fold</li><li>Escalado</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="03_student_performance.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/03-Student-Performance-Optimization"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/feature_selection_cv.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/03-Student-Performance-Optimization/data/uci_student_data.csv"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg><span>Dataset</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">04</span>
+          </header>
+          <h3 class="card__title">Determinantes de la Edad Materna</h3>
+          <p class="card__desc">Inferencia sobre 1.6 millones de microdatos nacionales, con Backward Selection y regresión polinomial para capturar la curvatura real de la escolaridad.</p>
+          <ul class="chips"><li>Big Data</li><li>Backward Selection</li><li>Polinomial</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="04_maternal_age_determinants.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/04-Maternal-Age-Determinants"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/04-Maternal-Age-Determinants/maternal_age_modeling.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><span>Fuente INEGI</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="clasificacion">
+    <div class="wrap">
+      <div class="sec__head reveal">
+        <span class="sec__num">02</span><h2>Clasificación</h2>
+        <span class="sec__count">4 investigaciones</span>
+      </div>
+      <div class="rule reveal"></div>
+      <p class="sec__lead reveal">
+        Predicción de variables cualitativas sobre clases desbalanceadas, donde la exactitud simple engaña.
+        De la regresión logística escrita a mano hasta ensambles, máquinas de vectores de soporte y redes neuronales.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">05</span>
+          </header>
+          <h3 class="card__title">Embarazo Adolescente</h3>
+          <p class="card__desc">Regresión logística implementada desde cero con Newton-Raphson, validación cruzada estratificada, curva ROC y lectura de coeficientes como razones de momios.</p>
+          <ul class="chips"><li>Logística desde cero</li><li>IRLS</li><li>ROC / AUC</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="05_adolescent_pregnancy.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/05-Adolescent-Pregnancy-Risk-Factors"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/05-Adolescent-Pregnancy-Risk-Factors/logistic_regression_classification.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><span>Fuente INEGI</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">06</span>
+          </header>
+          <h3 class="card__title">Discriminantes y Árboles</h3>
+          <p class="card__desc">Análisis Discriminante Lineal programado desde cero frente a un árbol con poda por costo-complejidad, sobre tres clases fuertemente desbalanceadas.</p>
+          <ul class="chips"><li>LDA desde cero</li><li>Poda ccp</li><li>Multiclase</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="06_maternal_age_groups.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/06-Maternal-Age-Group-Classification"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/06-Maternal-Age-Group-Classification/discriminant_analysis_trees.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><span>Fuente INEGI</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <header class="card__head">
+            <span class="card__num">07</span>
+          </header>
+          <h3 class="card__title">Ensambles, SVM y Redes</h3>
+          <p class="card__desc">Comparación de Random Forest, Gradient Boosting, SVM con kernel radial y una red neuronal escrita en NumPy, contrastando desempeño contra costo computacional.</p>
+          <ul class="chips"><li>Random Forest</li><li>Boosting</li><li>SVM</li><li>Red en NumPy</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="07_ensemble_benchmark.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/07-Ensemble-Methods-Benchmark"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/07-Ensemble-Methods-Benchmark/ensemble_svm_neural_networks.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><span>Fuente INEGI</span></a>
+          </div>
+        </article>
+        <article class="card card--feature">
+          <header class="card__head">
+            <span class="card__num">08</span><span class="badge">Proyecto final</span>
+          </header>
+          <h3 class="card__title">Registro Tardío de Nacimientos</h3>
+          <p class="card__desc">Seis modelos de clasificación sobre el derecho a la identidad, con detección y demostración de fuga de datos, y contraste de resultados contra cifras del CONAPO.</p>
+          <ul class="chips"><li>6 modelos</li><li>Fuga de datos</li><li>Contraste oficial</li></ul>
+          <div class="card__links">
+            <a class="btn btn--primary" href="08_registration_delay.html"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h9l5 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M13 3v5h5"/><path d="M8 13h6M8 17h4"/></svg><span>Ver reporte</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/tree/main/08-Birth-Registration-Delay"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.9 5 4.9 4.9 0 0 0 19.8.5S18.5.1 16 1.8a13.4 13.4 0 0 0-7 0C6.5.1 5.2.5 5.2.5A4.9 4.9 0 0 0 5.1 5 5.2 5.2 0 0 0 3.7 8.8c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg><span>README</span></a>
+            <a class="btn" href="https://github.com/JuanAPG/Applied-Statistical-Learning/raw/main/08-Birth-Registration-Delay/registration_delay_modeling.ipynb"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Notebook</span></a>
+            <a class="btn" href="https://www.inegi.org.mx/programas/natalidad/#microdatos" target="_blank" rel="noopener"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><span>Fuente INEGI</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p>&copy; 2026 Juan Angel Galván Navarro · Universidad de Monterrey</p>
+    <a class="mail" href="mailto:juan.galvann@udem.edu"><svg class="i " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>juan.galvann@udem.edu</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // revelado escalonado
+  var items = document.querySelectorAll('.reveal, .card');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    items.forEach(function (el) { el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var sibs = Array.prototype.slice.call(e.target.parentElement.children);
+        var i = sibs.indexOf(e.target);
+        if (!e.target.style.getPropertyValue('--d')) {
+          e.target.style.setProperty('--d', Math.min(i, 5) * 65 + 'ms');
+        }
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  // sombra de la barra al hacer scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('is-stuck', window.scrollY > 8); };
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+
+  // seccion activa en la barra
+  var links = document.querySelectorAll('.nav__links a[href^="#"]');
+  var secs = Array.prototype.map.call(links, function (a) { return document.querySelector(a.getAttribute('href')); });
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a, i) { a.classList.toggle('is-active', secs[i] === e.target); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(function (s) { if (s) spy.observe(s); });
+})();
+</script>
 </body>
 </html>
