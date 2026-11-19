@@ -48,5 +48,9 @@ Bienvenido a este repositorio de investigación, el cual contiene una colección
    Entrenamiento de un agente y comparación de su política con una solución de referencia.
    * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/11_blackjack_q_learning.html)
 
+12. **[Proyector — Recomendación de películas con PCA](./12-Movie-Recommendation-PCA)**
+   Sistema interactivo de recomendación basado en calificaciones de MovieLens, componentes principales y reconstrucción de perfiles.
+   * **Aplicación interactiva:** [Abrir Proyector](https://juanapg.github.io/Applied-Statistical-Learning/12_movie_recommender.html)
+
 ---
 *Desarrollado por Juan Angel Galván Navarro.*
