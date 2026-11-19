@@ -1,6 +1,6 @@
 # Applied Statistical Learning & Predictive Modeling
 
-Bienvenido a este repositorio de investigación, el cual contiene una colección de modelos predictivos y análisis estadísticos aplicados a problemas del mundo real. El objetivo de este portafolio es aplicar técnicas de Machine Learning para descubrir patrones, evaluar correlaciones complejas y construir modelos predictivos robustos en los ámbitos de la salud pública, la macroeconomía, la educación y los derechos sociales. La colección abarca dos etapas: una primera dedicada a la inferencia y los modelos de regresión, y una segunda centrada en problemas de clasificación, desde la regresión logística y el análisis discriminante hasta métodos de ensamble, máquinas de vectores de soporte y redes neuronales.
+Bienvenido a este repositorio de investigación, el cual contiene una colección de modelos predictivos y análisis estadísticos aplicados a problemas del mundo real. El objetivo de este portafolio es aplicar técnicas de Machine Learning para descubrir patrones, evaluar correlaciones complejas y construir modelos predictivos robustos en los ámbitos de la salud pública, la macroeconomía, la educación y los derechos sociales. La colección abarca tres etapas: una primera dedicada a la inferencia y los modelos de regresión, y una segunda centrada en problemas de clasificación, desde la regresión logística y el análisis discriminante hasta métodos de ensamble, máquinas de vectores de soporte y redes neuronales, y una tercera dedicada al aprendizaje no supervisado y por refuerzo.
 
 ## Índice de Proyectos
 
@@ -35,6 +35,18 @@ Bienvenido a este repositorio de investigación, el cual contiene una colección
 8. **[Clasificación del Registro Tardío de Nacimientos en México](./08-Birth-Registration-Delay)** · *Proyecto*
    Estudio del derecho a la identidad mediante seis modelos de clasificación, con detección y demostración de fuga de datos, tratamiento de valores faltantes como señal, y contraste de los resultados contra cifras oficiales del CONAPO y el INEGI.
    * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/08_registration_delay.html)
+
+9. **[Agrupamiento de líneas celulares de cáncer](./09-Cancer-Gene-Expression-Clustering)**
+   K-means, PCA y agrupamiento jerárquico para explorar la expresión génica en NCI60.
+   * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/09_cancer_clustering.html)
+
+10. **[Subgrupos moleculares de cáncer de hígado](./10-Liver-Cancer-Molecular-Subtypes)**
+   Agrupamiento de tumores TCGA-LIHC y evaluación de estabilidad, características clínicas y supervivencia.
+   * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/10_liver_cancer_subtypes.html)
+
+11. **[Agente de Blackjack con Q-learning](./11-Blackjack-Reinforcement-Learning)**
+   Entrenamiento de un agente y comparación de su política con una solución de referencia.
+   * **Reporte interactivo:** [Ver reporte en GitHub Pages](https://juanapg.github.io/Applied-Statistical-Learning/11_blackjack_q_learning.html)
 
 ---
 *Desarrollado por Juan Angel Galván Navarro.*
