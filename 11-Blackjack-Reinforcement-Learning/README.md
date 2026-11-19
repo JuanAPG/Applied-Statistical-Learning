@@ -4,7 +4,7 @@ Agente Q-learning tabular comparado con políticas de referencia y una solución
 
 ## Reproducción
 
-El entorno utiliza Gymnasium, NumPy y Matplotlib. La generación de videos requiere imageio y un codificador compatible.
+El entorno utiliza Gymnasium, NumPy y Matplotlib. La generación de videos requiere imageio y un codificador compatible. Los videos se generan al ejecutar el notebook y no están incluidos en el reporte HTML.
 
 ## Archivos
 
